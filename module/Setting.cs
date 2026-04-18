@@ -18,10 +18,9 @@ namespace StaleBodySweeper
 
         }
 
-
-        [SettingsUISlider(min = 0, max = 1000, step = 1, scalarMultiplier = 1, unit = Unit.kDataMegabytes)]
+        [SettingsUISlider(min = 0, max = 500, step = 1)]
         [SettingsUISection(kSection)]
-        public int abandonedBodyCount { get; set; } = 100;
+        public int abandonedBodyCount { get; set; } = 25;
 
         [SettingsUIButton]
         [SettingsUIConfirmation]
@@ -47,7 +46,7 @@ namespace StaleBodySweeper
 
         public override void SetDefaults()
         {
-            abandonedBodyCount = 100;
+            abandonedBodyCount = 25;
         }
     }
 
@@ -62,16 +61,15 @@ namespace StaleBodySweeper
         {
             return new Dictionary<string, string>
             {
-                { m_Setting.GetSettingsLocaleID(), "StaleBodySweeper" },
+                { m_Setting.GetSettingsLocaleID(), "Stale Body Sweeper" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kSection), "Main" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.abandonedBodyCount)), "Int slider" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.abandonedBodyCount)), $"Use int property with getter and setter and [{nameof(SettingsUISliderAttribute)}] to get int slider" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.abandonedBodyCount)), "Abandoned Body Count" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.abandonedBodyCount)), "Maximum number of abandoned bodies to sweep." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ButtonWithConfirmation)), "Button with confirmation" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ButtonWithConfirmation)), $"Button can show confirmation message. Use [{nameof(SettingsUIConfirmationAttribute)}]" },
-                { m_Setting.GetOptionWarningLocaleID(nameof(Setting.ButtonWithConfirmation)), "is it confirmation text which you want to show here?" },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ButtonWithConfirmation)), "Reset to Defaults" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ButtonWithConfirmation)), "Reset all settings to their default values" },
+                { m_Setting.GetOptionWarningLocaleID(nameof(Setting.ButtonWithConfirmation)), "Are you sure you want to reset all settings to defaults?" },
             };
         }
 

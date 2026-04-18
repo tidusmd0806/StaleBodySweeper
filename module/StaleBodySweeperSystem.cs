@@ -23,14 +23,13 @@ namespace StaleBodySweeper
         protected override void OnCreate()
         {
             base.OnCreate();
-            m_abandonedBodyCount = Mod.m_Setting.abandonedBodyCount;
             Mod.log.Info("StaleBodySweeperSystem created.");
         }
 
         protected override void OnUpdate()
         {
-            // Execute every 256 frames (approx. every few seconds)
             if (UnityEngine.Time.frameCount % CheckIntervalFrames != 0) return;
+            m_abandonedBodyCount = Mod.m_Setting.abandonedBodyCount;
 
             EntityQuery deadQuery = GetEntityQuery(new EntityQueryDesc
             {
@@ -119,9 +118,10 @@ namespace StaleBodySweeper
                 statsOutput += $"Timer [{stat.Key}]: {stat.Value} citizens\n";
             }
             statsOutput += $"--------------------------------\n";
-            statsOutput += $"Tracking(Grace): {trackingCount} | Removed: {removedCount} (Grace Limit: {m_abandonedBodyCount})";
+            string statsOutput_2 = $"Tracking(Grace): {trackingCount} | Removed: {removedCount} (Grace Limit: {m_abandonedBodyCount})";
 
-            Mod.log.Info(statsOutput);
+            Mod.log.Debug(statsOutput);
+            Mod.log.Info(statsOutput_2);
 
             entities.Dispose();
             healthProblems.Dispose();
